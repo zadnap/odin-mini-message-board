@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Message Board</title>
+</head>
+<body>
+    <ul>
+        <% messages.map((msg) => { %>
+            <li>
+                <p>User <%= msg.user %></p>
+                <p>Say <%= msg.text %></p>
+                <a href="/message/<%= msg.id %>">Detail</a>
+            </li>
+        <% }) %>
+    </ul>
+    <a href="/new">Enter Message</a>
+</body>
+</html>
