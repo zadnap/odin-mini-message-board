@@ -1,20 +1,12 @@
-const messages = [
-  {
-    id: 1,
-    text: 'Hi there!',
-    user: 'Amando',
-    added: new Date(),
-  },
-  {
-    id: 2,
-    text: 'Hello World!',
-    user: 'Charles',
-    added: new Date(),
-  },
-];
+const db = require('../db/queries');
 
-const renderIndex = (req, res) => {
-  res.render('index', { title: 'Mini Message Board', messages });
+const renderIndex = async (req, res) => {
+  const messages = await db.getAllMessages();
+
+  res.render('index', {
+    title: 'Mini Message Board',
+    messages,
+  });
 };
 
 module.exports = { renderIndex };

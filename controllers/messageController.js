@@ -1,36 +1,9 @@
-const messages = [
-  {
-    id: 1,
-    text: 'Hi there!',
-    user: 'Amando',
-    added: new Date(),
-  },
-  {
-    id: 2,
-    text: 'Hello World!',
-    user: 'Charles',
-    added: new Date(),
-  },
-];
+const db = require('../db/queries');
 
-const getMessageForm = (req, res) => {
-  res.render('form');
+const getDetailedMessage = async (req, res) => {
+  const msg = await db.getMessage(req.params.id);
+
+  res.render('message', { msg });
 };
 
-const postMessage = (req, res) => {
-  messages.push({
-    id: messages[messages.length - 1].id + 1,
-    text: req.body.messageText,
-    user: req.body.usernameText,
-    added: new Date(),
-  });
-  res.redirect('/');
-};
-
-const getDetailedMessage = (req, res) => {
-  res.render('message', {
-    msg: messages.find((msg) => msg.id === Number(req.params.id)),
-  });
-};
-
-module.exports = { getMessageForm, postMessage, getDetailedMessage };
+module.exports = { getDetailedMessage };
